@@ -17,7 +17,9 @@ gulp
 ```
 
 ## File Structure
+
 src = Source files. These are just for production use.
+
 dist = Distribution files. These go on the server.
 
 ## Mixins
