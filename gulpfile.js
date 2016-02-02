@@ -1,125 +1,99 @@
 /* Require Plugins */
-var gulp = require('gulp'),
-    svgSprite = require('gulp-svg-sprite'),
-    svg2png = require('gulp-svg2png'),
+const gulp = require('gulp'),
+    gulpUtil = require('gulp-util'),
+    postcss = require('gulp-postcss'),
+        simpleVars = require('postcss-simple-vars'),
+        partialImport = require('postcss-partial-import'),
+        atImport = require('postcss-import'),
+        nested = require('postcss-nested'),
+        mathjs = require('postcss-mathjs'),
+        mixins = require('postcss-mixins'),
+        extend = require('postcss-extend'),
+        mqpacker = require('css-mqpacker'),
+        autoprefixer = require('autoprefixer'),
+        csswring = require('csswring'),
     sourcemaps = require('gulp-sourcemaps'),
-    sass = require('gulp-ruby-sass'),
-    autoprefixer = require('gulp-autoprefixer'),
-    lr = require('tiny-lr')(),
-    express = require('express'),
-    app = express();
- 
- 
-/* Setup Configs */
-var EXPRESS_PORT = 4000;
-var EXPRESS_ROOT = __dirname;
-var LIVERELOAD_PORT = 35729;
-var watching = false;
+    uglify = require('gulp-uglify'),
+    imagemin = require('gulp-imagemin'),
+    pngquant = require('imagemin-pngquant'),
+    svgSprite = require('gulp-svg-sprite');
+
+// Sprite config
 var spriteConfig = {
     shape: {
         spacing: {
-            padding: 2
+            padding: 5
         }
     },
     mode: {
-        css: {         
+        // defs: true
+        css: {
             bust: false,
-            dest: '',
-            sprite: 'images-source/sprite.css.svg',
+            dest: 'src',
             render: {
-                scss: {
-                    dest: 'sass/base/_sprites.scss'
+                css: {
+                    dest: 'css/_sprites.css'
                 }
-            }
+            },
+            sprite: 'img/sprites.svg'
         }
     }
 };
-var compassConfig = {
-    config_file: 'config.rb',
-    css: 'css',
-    sass: 'sass'
-}
- 
-function notifyLivereload(event) {
-  var fileName = require('path').relative(EXPRESS_ROOT, event.path);
- 
-  lr.changed({
-    body: {
-      files: [fileName]
-    }
-  });
-}
- 
-/* Handle Compass Errors breaking the watch task */ 
-function onError(err) {
-  console.log(err.toString());
-  if (watching) {
-    this.emit('end');
-  } else {
-    process.exit(1);
-  }
-}
- 
-gulp.task('startExpress', function () {
-  app.use(require('connect-livereload')());
-  app.use(express.static(EXPRESS_ROOT));
-  app.listen(EXPRESS_PORT);
-});
- 
-gulp.task('startLivereload', function() {
-  lr.listen(LIVERELOAD_PORT);
-});
- 
-// gulp.task('compass', function() {
-//     gulp.src('sass/**/*.scss')
-//         .pipe(compass(compassConfig).on("error", onError));
-// });
 
-// compile and compress sass (plus susy and sass-globbing)
-// add vendor prefixes and source map
-gulp.task('sass', function() {
-    return sass('sass', {
-        require: ['susy', 'sass-globbing'],
-        style: 'compressed',
-        sourcemap: true
-    })
-    .on("error", onError)
-    .pipe(autoprefixer({
-            browsers: ['last 2 versions', 'ie 8', 'ie 9'],
-            cascade: false
-        }))
-    .pipe(sourcemaps.write())
-    .pipe(gulp.dest(''));
+// JS Min
+gulp.task('uglify', function() {
+  return gulp.src('./src/js/**/*.js')
+    .pipe(uglify())
+    .pipe(gulp.dest('./dist/js'));
 });
- 
-// Configure Compass Sprite Task 
+
+// CSS
+gulp.task('css', function () {
+    var processors = [
+        // the order matters!
+        atImport({glob: 'true'}),
+        mixins,
+        nested,
+        simpleVars,
+        mathjs,
+        extend,
+        partialImport,
+        autoprefixer({browsers: ['last 2 versions', 'IE 10']}),
+        mqpacker,
+        csswring
+    ];
+    return gulp.src('./src/css/style.css')
+        .pipe(sourcemaps.init())
+        .pipe(postcss(processors).on('error', gulpUtil.log))
+        .pipe(sourcemaps.write('.'))
+        .pipe(gulp.dest('./dist'));
+});
+
+// Image Min
+gulp.task('imagemin', function () {
+    return gulp.src(['./src/img/*.{png,jpg,gif,svg}', '!./src/img/sprites/*'])
+        .pipe(imagemin({
+            progressive: true,
+            svgoPlugins: [{removeViewBox: false}],
+            use: [pngquant()]
+        }))
+        .pipe(gulp.dest('./dist/images'));
+});
+
+// Sprites
 gulp.task('sprites', function () {
-    gulp.src('images-source/sprites/icons-misc/*.svg')
+    gulp.src('./src/img/sprites/*.svg')
         .pipe(svgSprite(spriteConfig))
         .pipe(gulp.dest(''));
 });
 
-gulp.task('svg2png', function () {
-    gulp.src(['images-source/*.svg', '!images-source/sprites/*.svg'])
-        .pipe(svg2png())
-        .pipe(gulp.dest('images'));
-});
- 
- 
-// Watch Files For Changes
+// Watch task
 gulp.task('watch', function() {
-    watching = true;
-    // Uncomment these lines if you want to use the Express Server + livereload
-    // gulp.watch('*.html', notifyLivereload);
-    // gulp.watch('css/*.css', notifyLivereload);
-    // gulp.watch('js/*.js', notifyLivereload);
-    gulp.watch('images-source/sprites/icons-misc/*.svg', ['sprites']);
-    gulp.watch('images-source/*.svg', ['svg2png']);
-    gulp.watch('sass/**/*.scss', ['sass']);
+    gulp.watch('js/*.js', ['uglify']);
+    gulp.watch('src/css/**/*.css',['css']);
+    gulp.watch(['./src/img/*', '!./src/img/sprites/*'],['imagemin']);
+    gulp.watch('./src/img/sprites/*',['sprites', 'imagemin']);
 });
- 
-// Default Task
-gulp.task('default',['watch']);
 
-// Default Task with Server
-gulp.task('serve', ['startExpress','startLivereload','watch']);
+// Default Task
+gulp.task('default', ['uglify', 'css', 'sprites', 'imagemin', 'watch']);

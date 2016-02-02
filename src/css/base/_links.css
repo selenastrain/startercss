@@ -1,0 +1,8 @@
+a {
+    color: $blue;
+    text-decoration: none;
+    @mixin link-states {
+        color: $blue-dark;
+        text-decoration: underline;
+    }
+}

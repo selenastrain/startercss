@@ -1,0 +1,21 @@
+%btn-base {
+    display: inline-block;
+    border: none;
+    background: none;
+    text-decoration: none;
+    line-height: 1.2;
+    border-radius: 0;
+    text-align: center;
+    transition: transform 0.2s ease-out;
+
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: 600;
+
+    @mixin font-smoothing;
+    @mixin link-states {
+        text-decoration: none;
+        transform: scale(1.1);
+        color: #fff;
+    }
+}

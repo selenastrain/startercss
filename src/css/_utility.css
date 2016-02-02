@@ -1,0 +1,6 @@
+.visually-hidden {
+    @mixin visually-hidden;
+}
+.align-center {
+    text-align: center;
+}

@@ -1,0 +1,55 @@
+
+@define-mixin font-smoothing {
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+}
+
+@define-mixin float-clear {
+  &:after {
+    clear: both;
+    content: '';
+    display: table;
+  }
+}
+
+/* visual tricks */
+@define-mixin image-replace {
+  display: block;
+  text-indent: 200%;
+  overflow: hidden;
+  white-space: nowrap;
+}
+@define-mixin visually-hidden {
+  position: absolute !important;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+  clip-path: inset(1px 1px 1px 1px);
+}
+
+/* position */
+@define-mixin centerer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@define-mixin pseudo-absolute {
+  position: absolute;
+  content: '';
+  display: inline-block;
+}
+
+
+/* media breaks */
+@define-mixin media-break $break {
+  @media (min-width: $break) { @mixin-content; }
+}
+
+/* This will need to use the bad fallback break variables
+ * until someone gets the postcss mixins/maths working properly
+*/
+@define-mixin media-break-max $break {
+  @media (max-width: $break) { @mixin-content; }
+}
