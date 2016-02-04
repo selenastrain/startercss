@@ -1,4 +1,4 @@
-A starter postCSS project from Gravity Works.
+A starter postCSS project from [Gravity Works](http://www.gravityworksdesign.com/).
 
 ## Prereqs
 * Node
