@@ -1,4 +1,4 @@
-A starter postCSS project from Gravity Works.
+A starter postCSS project from [Gravity Works](http://www.gravityworksdesign.com/).
 
 ## Prereqs
 * Node
@@ -50,15 +50,4 @@ Flexbox grid should be used like this:
   <div class="flex-half">...</div>
   <div class="flex-half">...</div>
 </div>
-```
-
-## To Do
-1. We need a simple non-flexbox grid option
-2. Change file extensions from `.css` to `.postcss` so the format will be auto-recognized.
-3. postCSS mathjs can't be used in conjuction with postCSS mixins. For example, if you do this, you can't auto-adjust the break to be -1 pixels.
-```scss
-.my-box {
-  @mixin media-break-max $br-md {
-  }
-}
 ```
