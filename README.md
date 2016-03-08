@@ -6,7 +6,7 @@ A starter postCSS project from [Gravity Works](http://www.gravityworksdesign.com
 
 ## Install
 
-Install the required node modules
+In terminal, navigate to this project directory and install the required node modules
 ```
 npm install
 ```
