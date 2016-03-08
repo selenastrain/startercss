@@ -18,6 +18,19 @@ const gulp = require('gulp'),
     pngquant = require('imagemin-pngquant'),
     svgSprite = require('gulp-svg-sprite');
 
+// Error fix
+var watching = false;
+
+function onError(err) {
+  console.log(err.toString());
+  if (watching) {
+    this.emit('end');
+  } else {
+    // if you want to be really specific
+    process.exit(1);
+  }
+}
+
 // Sprite config
 var spriteConfig = {
     shape: {
@@ -59,12 +72,13 @@ gulp.task('css', function () {
         extend,
         partialImport,
         autoprefixer({browsers: ['last 2 versions', 'IE 10']}),
-        mqpacker,
+        mqpacker({ sort: true }),
         csswring
     ];
     return gulp.src('./src/css/style.css')
         .pipe(sourcemaps.init())
         .pipe(postcss(processors).on('error', gulpUtil.log))
+        .on('error', onError)
         .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest('./dist'));
 });
@@ -89,8 +103,9 @@ gulp.task('sprites', function () {
 
 // Watch task
 gulp.task('watch', function() {
-    gulp.watch('js/*.js', ['uglify']);
-    gulp.watch('src/css/**/*.css',['css']);
+    watching = true;
+    gulp.watch('./js/*.js', ['uglify']);
+    gulp.watch('./src/css/**/*.css',['css']);
     gulp.watch(['./src/img/*', '!./src/img/sprites/*'],['imagemin']);
     gulp.watch('./src/img/sprites/*',['sprites', 'imagemin']);
 });
