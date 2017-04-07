@@ -1,0 +1,26 @@
+html {
+  font-size: 62.5%;
+  box-sizing: border-box;  
+}
+
+*, *:after, *:before {
+  box-sizing: inherit;
+}
+
+body {
+  font-size: $ts-body;
+  color: $text-color;
+  line-height: $text-lh;
+  font-family: $font-main;
+  background: #fff;
+}
+
+::selection {
+  background: $blue;
+  color: #fff;
+}
+
+::-moz-selection {
+  background: $blue;
+  color: #fff;
+}

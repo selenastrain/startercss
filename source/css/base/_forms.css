@@ -1,0 +1,16 @@
+/* generic form styles*/
+select {
+  /* font-size: $ts-sm; */
+}
+
+.select-full {
+  width: 100%;
+  max-width: 100%;
+}
+
+input[type="radio"], input[type="checkbox"] {
+  margin-right: 5px;
+  + label {
+    margin-right: 14px;
+  }
+}

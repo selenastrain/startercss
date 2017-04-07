@@ -1,0 +1,18 @@
+/*---
+title:   Lists
+section: Basic
+---
+
+
+```example:html
+<ul class="list-tokens">
+	<li>Item 1</li>
+	<li>Item 2</li>
+	<li>Item 3</li>
+</ul>
+```
+*/
+
+.plain-list {
+	@mixin plain-list;
+}

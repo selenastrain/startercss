@@ -1,91 +1,101 @@
-/* Require Plugins */
-const gulp = require('gulp'),
+var gulp = require('gulp'),
     gulpUtil = require('gulp-util'),
+    gulpCopy = require('gulp-copy'),
+    uglify = require('gulp-uglify'),
+    svgSprite = require('gulp-svg-sprite'),
+    imagemin = require('gulp-imagemin'),
     postcss = require('gulp-postcss'),
         simpleVars = require('postcss-simple-vars'),
-        partialImport = require('postcss-partial-import'),
-        atImport = require('postcss-import'),
+        cssImport = require('postcss-easy-import'),
         nested = require('postcss-nested'),
-        mathjs = require('postcss-mathjs'),
+        calc = require('postcss-calc'),
         mixins = require('postcss-mixins'),
         extend = require('postcss-extend'),
-        mqpacker = require('css-mqpacker'),
+        colors = require('postcss-color-function'),
         autoprefixer = require('autoprefixer'),
+        mdcss = require('mdcss'),
+        cssmqpacker = require('css-mqpacker'),
         csswring = require('csswring'),
-    sourcemaps = require('gulp-sourcemaps'),
-    uglify = require('gulp-uglify'),
-    imagemin = require('gulp-imagemin'),
     pngquant = require('imagemin-pngquant'),
-    svgSprite = require('gulp-svg-sprite');
+    del = require('del'),
+    runSequence = require('run-sequence'),
+    browserSync = require('browser-sync').create();
 
-// Error fix
-var watching = false;
+var paths = {
+    css: 'source/css/**/*.css',
+    images: 'source/images/*',
+    sprites: 'source/svg-sprites/*.svg',
+    js: 'source/js/*.js'
+};
 
-function onError(err) {
-  console.log(err.toString());
-  if (watching) {
-    this.emit('end');
-  } else {
-    // if you want to be really specific
-    process.exit(1);
-  }
-}
-
-// Sprite config
 var spriteConfig = {
+    dest: '',
     shape: {
         spacing: {
             padding: 5
         }
     },
     mode: {
-        // defs: true
-        css: {
-            bust: false,
-            dest: 'src',
-            render: {
-                css: {
-                    dest: 'css/_sprites.css'
-                }
-            },
-            sprite: 'img/sprites.svg'
-        }
+      css: {
+          bust: false,
+          dest: './',
+          sprite: 'dist/images/sprites.svg',
+          render: {
+              css: {
+                  dest: './source/css/base/_sprites.css',
+                  template: './source/svg-sprites/sprites.css'
+              }
+          }
+      }
     }
 };
 
-// JS Min
-gulp.task('uglify', function() {
-  return gulp.src('./src/js/**/*.js')
-    .pipe(uglify())
-    .pipe(gulp.dest('./dist/js'));
+/* Handle CSS build breaking the watch task */ 
+function onError(err) {
+  console.log(err.toString());
+  if (watching) {
+    this.emit('end');
+  } else {
+    process.exit(1);
+  }
+}
+
+
+gulp.task('serve', ['css'], function() {
+    // for running local drupal 
+    // browserSync.init({
+    //     port: 8888,
+    //     open: 'external',
+    //     host: "YOURPROJECT.dev",
+    //     proxy: "http://YOURPROJECT.dev:8888"
+    // });
+
+    // for mdcss styleguide
+    browserSync.init({
+      server: "./source/styleguide"
+    })
+
+    gulp.watch(paths.css, ['css']);
+    gulp.watch("./source/styleguide/index.html").on('change', browserSync.reload);
 });
 
-// CSS
-gulp.task('css', function () {
-    var processors = [
-        // the order matters!
-        atImport({glob: 'true'}),
-        mixins,
-        nested,
-        simpleVars,
-        mathjs,
-        extend,
-        partialImport,
-        autoprefixer({browsers: ['last 2 versions', 'IE 10']}),
-        mqpacker({ sort: true }),
-        csswring
-    ];
-    return gulp.src('./src/css/style.css')
-        .pipe(sourcemaps.init())
-        .pipe(postcss(processors).on('error', gulpUtil.log))
-        .on('error', onError)
-        .pipe(sourcemaps.write('.'))
-        .pipe(gulp.dest('./dist'));
+// run all image tasks
+gulp.task('build-images', function(callback) {
+  runSequence('clean-images', ['imagemin', 'sprites'], 'copy-images', callback);
 });
-
-// Image Min
+// get rid of old images
+gulp.task('clean-images', function() {
+    return del(['./dist/images']);
+});
+// build sprites
+gulp.task('sprites', function() {
+    return gulp.src(paths.sprites)
+        .pipe(svgSprite(spriteConfig))
+        .pipe(gulp.dest(''));
+});
+// minify images
 gulp.task('imagemin', function () {
-    return gulp.src(['./src/img/*.{png,jpg,gif,svg}', '!./src/img/sprites/*'])
+   return gulp.src(paths.images)
         .pipe(imagemin({
             progressive: true,
             svgoPlugins: [{removeViewBox: false}],
@@ -93,22 +103,63 @@ gulp.task('imagemin', function () {
         }))
         .pipe(gulp.dest('./dist/images'));
 });
-
-// Sprites
-gulp.task('sprites', function () {
-    gulp.src('./src/img/sprites/*.svg')
-        .pipe(svgSprite(spriteConfig))
-        .pipe(gulp.dest(''));
+// copy images into styleguide
+gulp.task('copy-images', function() {
+  return gulp.src('./dist/images/**/*')
+        .pipe(gulpCopy('./source/styleguide'))
+        .pipe(gulp.dest('./source/styleguide'));
 });
 
-// Watch task
+// JS minify
+gulp.task('js', function() {
+  return gulp.src(paths.js)
+    .pipe(uglify().on('error', onError))
+    .pipe(gulp.dest('./dist/js'));
+});
+
+// CSS Process
+gulp.task('css', function () {
+    const options = {
+        browsers: ['last 2 versions', 'IE 10'], flexbox: 'no-2009'
+    };
+
+    // preprocessor order matters!
+    const plugins = [
+        cssImport({glob:'true'}),
+        mixins,
+        nested,
+        simpleVars,
+        colors,
+        extend,
+        calc,
+        mdcss({
+            theme: require('mdcss-theme-github'),
+            destination: './source/styleguide',
+            // !!! Don't use the mdcss assets option to move css to the styleguide folder. 
+            // It will move the css before it's done compiling.
+            assets: ['./dist/images'],
+            examples: ({
+                css: ['./dist/css/style.css']
+            })
+        }),
+        cssmqpacker({sort: true}),
+        autoprefixer({browsers: options.browsers}),
+        csswring({map: false})
+    ];
+    return gulp.src('./source/css/*.css')
+        .pipe(postcss(plugins).on('error', onError))
+        .pipe(gulp.dest('./dist/css'))
+        // copy into the styleguide
+        .pipe(gulp.dest('./source/styleguide/css'))
+        .pipe(browserSync.stream());
+});
+
 gulp.task('watch', function() {
+    // not including css watch because it's already in the serve task
     watching = true;
-    gulp.watch('./js/*.js', ['uglify']);
-    gulp.watch('./src/css/**/*.css',['css']);
-    gulp.watch(['./src/img/*', '!./src/img/sprites/*'],['imagemin']);
-    gulp.watch('./src/img/sprites/*',['sprites', 'imagemin']);
+    gulp.watch(paths.js, ['js']);
+    gulp.watch([paths.images, paths.sprites], ['build-images']);
 });
 
-// Default Task
-gulp.task('default', ['uglify', 'css', 'sprites', 'imagemin', 'watch']);
+gulp.task('default', ['serve', 'watch']);
+// 'build-images', 'css', 'js', 

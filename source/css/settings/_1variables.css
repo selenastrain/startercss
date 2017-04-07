@@ -1,0 +1,39 @@
+/* Colors */
+$blue:           #1B789F;
+$blue-dark:      #135875;
+$text-color:     #000;
+
+/* Sizes */
+$gutter-sm: 15px;
+$gutter: 30px;
+
+$vert-space-sm: 20px;
+$vert-space-md: 30px;
+
+$button-height: 48px;
+$button-sm-height: 38px;
+$transition-short: 150ms;
+
+/* Text */
+$font-main: 'Open Sans', sans-serif; /* Weights: Use: */
+$font-secondary: 'Open Sans', sans-serif; /* Weights: Use: */
+
+$text-margin: 20px;
+
+$ts-body: 1.6rem;
+$text-lh: 1.6;
+$text-lh-sm: 1.4;
+
+$ts-h1: 3.1rem;
+$ts-h2: 2.5rem;
+$ts-h3: 2.3rem;
+$ts-h4: 2.1rem;
+$ts-h5: 1.9rem;
+$ts-h6: 1.7rem;
+
+/* Breakpoints */
+$max-width:   1300px;
+
+$break-sm:    0px;
+$break-md:    0px;
+$break-lg:    0px;

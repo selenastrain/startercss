@@ -1,0 +1,61 @@
+/*---
+title:   Base
+section: Grid
+---
+
+Flex grid based off of Philip Walton's Solved by Flexbox
+* https://philipwalton.github.io/solved-by-flexbox/demos/grids/ 
+* https://github.com/philipwalton/solved-by-flexbox/blob/master/assets/css/components/grid.css
+
+```example:html
+  <div class="container">
+    <h2 style="margin-bottom:20px;">50% Equal Height Cells</h2>
+    <div class="grid grid--gutters grid--flexcells grid--1of2-md">
+      
+      <div class="grid-cell">
+        <div style="width: 100%; padding: 0.8em 1em; background: rgba(147, 128, 108, 0.1);">
+          <h3>First Half</h3>
+          <p>Curabitur blandit tempus porttitor. Etiam porta sem malesuada magna mollis euismod.</p>
+        </div>
+      </div>
+
+      <div class="grid-cell">
+        <div style="width: 100%; padding: 0.8em 1em; background: rgba(147, 128, 108, 0.1);">
+          <h3>Second Half</h3>
+          <p>Curabitur blandit tempus porttitor. Etiam porta sem malesuada magna mollis euismod. Curabitur blandit tempus porttitor. Etiam porta sem malesuada magna mollis euismod.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+```
+*/
+
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
+}
+
+.grid-cell {
+  flex: 0 0 100%;
+}
+
+/*  variations */
+.grid--flexcells {
+  /* makes cells equal height */  
+  > .grid-cell {
+    display: flex; 
+  }
+}
+
+@mixin mq $break-md {
+
+  .grid--1of2-md {
+    > .grid-cell {
+      flex: 0 0 50%;
+    }
+  }
+
+}

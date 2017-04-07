@@ -1,53 +1,31 @@
-A starter postCSS project from [Gravity Works](http://www.gravityworksdesign.com/).
+A postCSS starter project from [Gravity Works](http://www.gravityworksdesign.com/).
 
-## Prereqs
-* Node
-* Gulp
+## Getting Started
+1. Install [Node.js](https://nodejs.org/en/) and [Gulp.js](http://gulpjs.com/) if you don't have them already
+2. Copy all the files and folders inside of /gwpostcss into your theme directory (don't forget the .gitignore)
+3. Navigate to your theme directory in command line
+4. Run `npm install` to download all the required node modules
+5. Run `gulp` to start watching your files for changes, or `gulp thetaskname` to run a single task. See gulpfile.js for all available tasks.
 
-## Install
+### Folder Structure
+`/src` = Source files. These are for dev use only.
 
-In terminal, navigate to this project directory and install the required node modules
-```
-npm install
-```
+`/dist` = Distribution files. These go on the server.
 
-Run the gulp tasks
-```
-gulp
-```
+### The Gulp Tasks
+The Gulp tasks are configured to
 
-## File Structure
+* Compile [PostCSS](https://github.com/postcss/postcss) into minified CSS
+* Create a style guide with [mdcss](https://github.com/jonathantneal/mdcss)
+* Open & auto reload the mdcss styleguide in the browser
+* Minify JS
+* Build an svg sprite sheets
+* Minify images
 
-src = Source files. These are just for production use.
+You can add to, remove, or modify any of these tasks. 
 
-dist = Distribution files. These go on the server.
+#### Sprites Task
+If you need to change the sprite image path, see /src/svg-sprites/sprites.css
 
-## Mixins
-
-Defining mixins:
-```scss
-@define-mixin media-break $break {
-  @media (min-width: $break) { @mixin-content; }
-}
-```
-
-Using mixins:
-```scss
-body {
-  // mobile first css here.
-  @mixin media-break $br-md {
-    // Your > mobile css here.
-  }
-}
-```
-
-## Using The Grid
-Plain percentage based grid still needs to be added in.
-
-Flexbox grid should be used like this:
-```html
-<div class="flex-row">
-  <div class="flex-half">...</div>
-  <div class="flex-half">...</div>
-</div>
-```
+## But This is Just a Starting Point
+Don't feel like you have to keep all preconfigured styles or settings. 

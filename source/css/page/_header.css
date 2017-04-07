@@ -1,0 +1,19 @@
+/*---
+title:   Header
+section: Page
+---
+
+```example:html
+<header role="banner" class="header region-blue">
+	<div class="container gutter">
+		<p>Cras mattis consectetur purus sit amet fermentum.</p>
+	</div>
+</header>
+
+
+```
+*/
+
+.header {
+	
+}
