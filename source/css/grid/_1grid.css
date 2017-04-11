@@ -10,7 +10,7 @@ Flex grid based off of Philip Walton's Solved by Flexbox
 ```example:html
   <div class="container">
     <h2 style="margin-bottom:20px;">50% Equal Height Cells</h2>
-    <div class="grid grid--gutters grid--flexcells grid--1of2-md">
+    <div class="grid grid--gutters grid--flexcells md-grid--1of2">
       
       <div class="grid-cell">
         <div style="width: 100%; padding: 0.8em 1em; background: rgba(147, 128, 108, 0.1);">
@@ -38,23 +38,62 @@ Flex grid based off of Philip Walton's Solved by Flexbox
   padding: 0;
 }
 
-.grid-cell {
-  flex: 0 0 100%;
-}
-
-/*  variations */
-.grid--flexcells {
-  /* makes cells equal height */  
+/* makes cells equal height */
+.grid--flexcells {  
   > .grid-cell {
     display: flex; 
   }
 }
 
-@mixin mq $break-md {
+.grid-cell {
+  flex: 0 0 100%;
+  /* IE 10 fallback */
+  width: 100%;
+  max-width: 100%;
+}
 
-  .grid--1of2-md {
+.lg-grid--1of4 {
+  > .grid-cell {
+    flex: 0 0 50%;
+    /* IE 10 fallback */
+    width: 50%;
+    max-width: 50%;
+  }
+}
+
+@mixin mq $break-md {
+  
+  .lg-grid--1of4,
+  .md-grid--1of2 {
     > .grid-cell {
       flex: 0 0 50%;
+      /* IE 10 fallback */
+      width: 50%;
+      max-width: 50%;
+    }
+  }
+
+  // first cell can't grow in width, second can
+  .md-grid--1of2-first-static {
+    flex-wrap: nowrap;
+    > .grid-cell:first-child {
+      flex: 0 1 auto;
+    }
+    > .grid-cell:last-child {
+      flex: 1 1 auto;
+    }
+  }
+
+}
+
+@mixin mq $break-lg {
+  
+  .lg-grid--1of4 {
+    > .grid-cell {
+      flex: 0 0 25%;
+      /* IE 10 fallback */
+      width: 25%;
+      max-width: 25%;
     }
   }
 
