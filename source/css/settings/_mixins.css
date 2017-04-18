@@ -7,24 +7,6 @@
   @media (max-width: $break) { @mixin-content; }
 }
 
-/* media block */
-@define-mixin media {
-  display: flex;
-  width: 100%;
-}
-
-@define-mixin media_image {
-  flex: 0 0 auto;
-}
-
-@define-mixin media_body {
-  padding-left: 15px;
-  flex: 1 1 auto;
-  flex-direction: column;
-  justify-content: flex-start;
-  line-height: 1.4;
-}
-
 @define-mixin float-clear {
   &:after {
     clear: both;
@@ -77,5 +59,27 @@
   li {
    margin: 0;
    list-style: none;
+  }
+}
+
+/* spacing */
+@define-mixin child-margin-clear-first {
+  > *:first-child {
+    margin-top: 0;
+  }
+}
+
+@define-mixin child-margin-clear-last {
+  > *:last-child {
+    margin-bottom: 0;
+  }
+}
+
+@define-mixin child-margin-clear {
+  > *:first-child {
+    margin-top: 0;
+  }
+  > *:last-child {
+    margin-bottom: 0;
   }
 }

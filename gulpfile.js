@@ -106,7 +106,7 @@ gulp.task('imagemin', function () {
 // copy images into styleguide
 gulp.task('copy-images', function() {
   return gulp.src('./dist/images/**/*')
-        .pipe(gulpCopy('./source/styleguide'))
+        .pipe(gulpCopy('./source/styleguide/dist'))
         .pipe(gulp.dest('./source/styleguide'));
 });
 
@@ -150,7 +150,7 @@ gulp.task('css', function () {
         .pipe(postcss(plugins).on('error', onError))
         .pipe(gulp.dest('./dist/css'))
         // copy into the styleguide
-        .pipe(gulp.dest('./source/styleguide/css'))
+        .pipe(gulp.dest('./source/styleguide/dist/css'))
         .pipe(browserSync.stream());
 });
 
