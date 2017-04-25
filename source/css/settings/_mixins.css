@@ -7,22 +7,6 @@
   @media (max-width: $break) { @mixin-content; }
 }
 
-@define-mixin float-clear {
-  &:after {
-    clear: both;
-    content: '';
-    display: table;
-  }
-}
-
-@define-mixin margin-clear {
-  &:before {
-    clear: both;
-    content: '';
-    display: table;
-  }
-}
-
 /* image related */
 @define-mixin image-replace {
   display: block;
@@ -39,13 +23,6 @@
   clip-path: inset(1px 1px 1px 1px);
 }
 
-/* position */
-@define-mixin centerer {
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
 @define-mixin pseudo-absolute {
   position: absolute;
   content: '';
@@ -59,27 +36,5 @@
   li {
    margin: 0;
    list-style: none;
-  }
-}
-
-/* spacing */
-@define-mixin child-margin-clear-first {
-  > *:first-child {
-    margin-top: 0;
-  }
-}
-
-@define-mixin child-margin-clear-last {
-  > *:last-child {
-    margin-bottom: 0;
-  }
-}
-
-@define-mixin child-margin-clear {
-  > *:first-child {
-    margin-top: 0;
-  }
-  > *:last-child {
-    margin-bottom: 0;
   }
 }
