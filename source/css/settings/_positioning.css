@@ -15,7 +15,7 @@
   transform: translateX(-50%);
 }
 
-/* spacing */
+/* floats */
 @define-mixin float-clear {
   &:after {
     clear: both;

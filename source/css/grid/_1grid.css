@@ -73,7 +73,7 @@ Flex grid based off of Philip Walton's Solved by Flexbox
     }
   }
 
-  // first cell can't grow in width, second can
+  /* first cell can't grow in width, second can */
   .md-grid--1of2-first-static {
     flex-wrap: nowrap;
     > .grid-cell:first-child {

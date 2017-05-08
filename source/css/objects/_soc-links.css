@@ -6,7 +6,7 @@ section: Objects
 
 ```example:html
 <div class="soc-links">
-  <a href="#" target="_blank" class="soc-link soc-link_fb"><span class="soc-link_icon svg-soc-fb"></span><span class="visually-hidden">like us on facebook</span></a></br>
+  <a href="#" target="_blank" class="soc-link soc-link_fb"><span class="soc-link_icon svg-soc-fb"></span><span class="visually-hidden">like us on facebook</span></a>
   <a href="#" target="_blank" class="soc-link soc-link_tw"><span class="soc-link_icon svg-soc-tw"></span><span class="visually-hidden">follow us on twitter</span></a>
 </div>
 ```

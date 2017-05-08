@@ -19,7 +19,6 @@ Containers belong inside of regions. They have a max width and float clearing an
   width: 100%;
   margin: 0 auto;
   @mixin float-clear;
-  @mixin margin-clear;
 }
 
 .container {

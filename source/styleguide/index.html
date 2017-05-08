@@ -44,6 +44,20 @@
         
   
         
+        <a class="menu-heading" href="#grid"><span>Grid</span></a>
+        
+    
+        <a class="menu-item" href="#Base"><span>Base</span></a>
+        
+        
+        <a class="menu-item" href="#Gutters"><span>Gutters</span></a>
+        
+        
+        <a class="menu-item" href="#Containers"><span>Containers</span></a>
+        
+        
+  
+        
         <a class="menu-heading" href="#page"><span>Page</span></a>
         
     
@@ -133,6 +147,80 @@
 
       <div class="markdown-body">
         <pre><code class="lang-example:html">&lt;span class=&quot;text-meta&quot;&gt;meta&lt;/span&gt;&lt;br&gt;
+</code></pre>
+
+        
+      </div>
+    </section>
+    
+      </div>
+    </section>
+    
+    <section id="grid">
+      <h1 class="page-title">Grid</h1>
+
+      <div class="markdown-body">
+        
+        
+    <section id="Base">
+      <h2 class="page-title">Base</h2>
+
+      <div class="markdown-body">
+        <p>Flex grid based off of Philip Walton&#39;s Solved by Flexbox</p>
+<ul>
+<li><a href="https://philipwalton.github.io/solved-by-flexbox/demos/grids/">https://philipwalton.github.io/solved-by-flexbox/demos/grids/</a> </li>
+<li><a href="https://github.com/philipwalton/solved-by-flexbox/blob/master/assets/css/components/grid.css">https://github.com/philipwalton/solved-by-flexbox/blob/master/assets/css/components/grid.css</a></li>
+</ul>
+<pre><code class="lang-example:html">  &lt;div class=&quot;container&quot;&gt;
+    &lt;h2 style=&quot;margin-bottom:20px;&quot;&gt;50% Equal Height Cells&lt;/h2&gt;
+    &lt;div class=&quot;grid grid--gutters grid--flexcells md-grid--1of2&quot;&gt;
+
+      &lt;div class=&quot;grid-cell&quot;&gt;
+        &lt;div style=&quot;width: 100%; padding: 0.8em 1em; background: rgba(147, 128, 108, 0.1);&quot;&gt;
+          &lt;h3&gt;First Half&lt;/h3&gt;
+          &lt;p&gt;Curabitur blandit tempus porttitor. Etiam porta sem malesuada magna mollis euismod.&lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;div class=&quot;grid-cell&quot;&gt;
+        &lt;div style=&quot;width: 100%; padding: 0.8em 1em; background: rgba(147, 128, 108, 0.1);&quot;&gt;
+          &lt;h3&gt;Second Half&lt;/h3&gt;
+          &lt;p&gt;Curabitur blandit tempus porttitor. Etiam porta sem malesuada magna mollis euismod. Curabitur blandit tempus porttitor. Etiam porta sem malesuada magna mollis euismod.&lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+    &lt;/div&gt;
+  &lt;/div&gt;
+</code></pre>
+
+        
+      </div>
+    </section>
+    
+    <section id="Gutters">
+      <h2 class="page-title">Gutters</h2>
+
+      <div class="markdown-body">
+        <p>Gutters generally belong on containers, but they can also be applied to blocks.</p>
+<ul>
+<li>.gutter</li>
+<li>.gutter-lg</li>
+</ul>
+
+        
+      </div>
+    </section>
+    
+    <section id="Containers">
+      <h2 class="page-title">Containers</h2>
+
+      <div class="markdown-body">
+        <p>Containers belong inside of regions. They have a max width and float clearing and can have a gutter class.</p>
+<pre><code class="lang-example:html">&lt;div class=&quot;region-blue&quot; style=&quot;margin-bottom:20px;overflow: hidden;&quot;&gt;
+  &lt;div class=&quot;container gutter&quot;&gt;
+    &lt;p style=&quot;color:#fff;&quot;&gt;container, gutter&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
 </code></pre>
 
         
@@ -243,6 +331,7 @@
 
       <div class="markdown-body">
         <p>Flex version of Harry Roberts&#39; flag object <a href="https://csswizardry.com/2013/05/the-flag-object/">https://csswizardry.com/2013/05/the-flag-object/</a></p>
+<p>For &lt;IE10 support, see <a href="https://codepen.io/siiron/full/kHdlp/">https://codepen.io/siiron/full/kHdlp/</a></p>
 <pre><code class="lang-example:html">  &lt;div class=&quot;flag flag--center&quot;&gt;
       &lt;div class=&quot;flag_media&quot;&gt;
         &lt;img src=&quot;https://unsplash.it/150/100/?random&quot; alt=&quot;&quot;&gt;
@@ -263,7 +352,7 @@
 
       <div class="markdown-body">
         <pre><code class="lang-example:html">&lt;div class=&quot;soc-links&quot;&gt;
-  &lt;a href=&quot;#&quot; target=&quot;_blank&quot; class=&quot;soc-link soc-link_fb&quot;&gt;&lt;span class=&quot;soc-link_icon svg-soc-fb&quot;&gt;&lt;/span&gt;&lt;span class=&quot;visually-hidden&quot;&gt;like us on facebook&lt;/span&gt;&lt;/a&gt;&lt;/br&gt;
+  &lt;a href=&quot;#&quot; target=&quot;_blank&quot; class=&quot;soc-link soc-link_fb&quot;&gt;&lt;span class=&quot;soc-link_icon svg-soc-fb&quot;&gt;&lt;/span&gt;&lt;span class=&quot;visually-hidden&quot;&gt;like us on facebook&lt;/span&gt;&lt;/a&gt;
   &lt;a href=&quot;#&quot; target=&quot;_blank&quot; class=&quot;soc-link soc-link_tw&quot;&gt;&lt;span class=&quot;soc-link_icon svg-soc-tw&quot;&gt;&lt;/span&gt;&lt;span class=&quot;visually-hidden&quot;&gt;follow us on twitter&lt;/span&gt;&lt;/a&gt;
 &lt;/div&gt;
 </code></pre>
@@ -291,7 +380,7 @@
         </main>
       </div>
       <footer class="footer">
-        Last modified Tuesday, 18 April 2017 11:30
+        Last modified Monday, 8 May 2017 16:47
       </footer>
     </div>
     <script src="prism.js?871234"></script>
