@@ -1,4 +1,4 @@
-A postCSS starter project from [Gravity Works](http://www.gravityworksdesign.com/).
+A CSS starter project from [Gravity Works](http://www.gravityworksdesign.com/).
 
 ## Getting Started
 1. Install [Node.js](https://nodejs.org/en/) and [Gulp.js](http://gulpjs.com/) if you don't have them already
@@ -16,10 +16,10 @@ A postCSS starter project from [Gravity Works](http://www.gravityworksdesign.com
 The Gulp tasks are configured to
 
 * Compile [PostCSS](https://github.com/postcss/postcss) into minified CSS
-* Create a style guide with [mdcss](https://github.com/jonathantneal/mdcss)
+* Create a styleguide with [mdcss](https://github.com/jonathantneal/mdcss) (see /src/styleguide/)
 * Open & auto reload the mdcss styleguide in the browser
 * Minify JS
-* Build an svg sprite sheets
+* Build an svg sprite sheet
 * Minify images
 
 You can add to, remove, or modify any of these tasks. 
@@ -28,4 +28,4 @@ You can add to, remove, or modify any of these tasks.
 If you need to change the sprite image path, see /src/svg-sprites/sprites.css
 
 ## But This is Just a Starting Point
-Don't feel like you have to keep all preconfigured styles or settings. 
+Please modify and add to these files as much as you want!
