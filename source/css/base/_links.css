@@ -4,8 +4,10 @@ section: Basic
 ---
 
 ```example:html
-<a href="#">plain link</a><br>
+<a href="#">plain link</a><br><br>
+<a href="#" class="icon-link"><img src="https://placehold.it/32" alt="" />icon link*</a>
 ```
+\*The img tag could also be a span with svg sprite classes
 */
 
 a {
@@ -14,6 +16,17 @@ a {
   &:hover, &:focus {
   	/* color: $blue-dark; */
   	text-decoration: underline;
+  }
+}
+
+.icon-link {
+  text-align: center;
+  a, img {
+    vertical-align: middle;
+    display: inline-block;
+  }
+  img {
+    margin-right: 10px;
   }
 }
 
