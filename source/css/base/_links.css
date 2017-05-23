@@ -20,11 +20,7 @@ a {
 }
 
 .icon-link {
-  text-align: center;
-  a, img {
-    vertical-align: middle;
-    display: inline-block;
-  }
+  @mixin horizontal-group;
   img {
     margin-right: 10px;
   }

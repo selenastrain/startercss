@@ -1,0 +1,92 @@
+/*---
+title:   Checkboxes
+section: Forms
+---
+
+```example:html
+<ul class="checkboxes">
+    <li class="checkbox_item">
+       <input id="one" type="checkbox" class="checkbox_box" checked>
+       <label for="one" class="checkbox_label">
+         Choice One
+       </label>
+    </li>
+    <li class="checkbox_item">
+       <input id="two" type="checkbox" class="checkbox_box">
+       <label for="two" class="checkbox_label">
+         Choice Two
+       </label>
+    </li>
+    <li class="checkbox_item">
+       <input id="three" type="checkbox" class="checkbox_box">
+       <label for="three" class="checkbox_label">
+         Choice Three
+       </label>
+    </li>
+</ul>
+
+```
+*/
+
+$check-size: 34px;
+
+.checkboxes {
+  padding: 0;
+  margin: 0;
+}
+
+.checkbox_item {
+  position: relative;
+  padding: 0;
+  margin: 0 0 15px 0;
+  list-style: none;
+}
+
+.checkbox_box {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+}
+
+.checkbox_label {
+  display: inline-block;
+  padding: 0 0 0 calc($check-size + 10px);
+  margin: 0;
+  cursor: pointer;
+
+  &:before {
+    transition: all .3s ease-in-out;
+    @mixin pseudo-absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    width: $check-size;
+    height: $check-size;
+    border: 3px solid transparent; 
+    border-top-style: none;
+    border-right-style: none;
+  }
+  
+  &:after {    
+    @mixin pseudo-absolute;
+    top: 0;
+    left: 0;
+    width: $check-size;
+    height: $check-size;
+    border: 3px solid gray;
+    background: inherit;
+    cursor: pointer;
+  }
+}
+
+.checkbox_box:checked + .checkbox_label {
+  &:before {
+      transform: rotate(-45deg);
+      top: 10px;
+      left: 4px;
+      width: 26px;
+      height: 10px;      
+      border-color: gray;
+    }
+}

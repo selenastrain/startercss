@@ -4,10 +4,10 @@ section: Page
 ---
 
 ```example:html
-<footer role="contentinfo" class="footer region-blue">
+<footer role="contentinfo" class="footer region-blue" style="margin-bottom:20px;overflow: hidden;">
 	<div class="container gutter">
-		<p>Cras mattis consectetur purus sit amet fermentum.</p>
-	</div>
+    <p style="color:#fff;">Footer things</p>
+  </div>
 </footer>
 
 

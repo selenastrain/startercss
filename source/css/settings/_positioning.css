@@ -1,3 +1,10 @@
+@define-mixin horizontal-group {
+    > * {
+      vertical-align: middle;
+      display: inline-block;
+    }
+}
+
 /* centering */
 @define-mixin centerer {
   top: 50%;
