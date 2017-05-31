@@ -14,6 +14,8 @@ $button-height: 48px;
 $button-sm-height: 38px;
 $transition-short: 150ms;
 
+$third: 33.3333%;
+
 /* Text */
 $font-main: 'Open Sans', sans-serif; /* Weights: Use: */
 $font-secondary: 'Open Sans', sans-serif; /* Weights: Use: */

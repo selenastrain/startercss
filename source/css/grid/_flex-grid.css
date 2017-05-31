@@ -10,16 +10,16 @@ Flex grid based off of Philip Walton's Solved by Flexbox
 ```example:html
   <div class="container">
     <h2 style="margin-bottom:20px;">50% Equal Height Cells</h2>
-    <div class="grid grid--gutters grid--flexcells md-grid--1of2">
+    <div class="flex-grid flex-grid--gutters flex-grid--flexcells md-flex-grid--1of2">
       
-      <div class="grid-cell">
+      <div class="flex-grid-cell">
         <div style="width: 100%; padding: 0.8em 1em; background: rgba(147, 128, 108, 0.1);">
           <h3>First Half</h3>
           <p>Curabitur blandit tempus porttitor. Etiam porta sem malesuada magna mollis euismod.</p>
         </div>
       </div>
 
-      <div class="grid-cell">
+      <div class="flex-grid-cell">
         <div style="width: 100%; padding: 0.8em 1em; background: rgba(147, 128, 108, 0.1);">
           <h3>Second Half</h3>
           <p>Curabitur blandit tempus porttitor. Etiam porta sem malesuada magna mollis euismod. Curabitur blandit tempus porttitor. Etiam porta sem malesuada magna mollis euismod.</p>
@@ -31,7 +31,7 @@ Flex grid based off of Philip Walton's Solved by Flexbox
 ```
 */
 
-.grid {
+.flex-grid {
   display: flex;
   flex-wrap: wrap;
   margin: 0;
@@ -39,21 +39,21 @@ Flex grid based off of Philip Walton's Solved by Flexbox
 }
 
 /* makes cells equal height */
-.grid--flexcells {  
-  > .grid-cell {
+.flex-grid--flexcells {  
+  > .flex-grid-cell {
     display: flex; 
   }
 }
 
-.grid-cell {
+.flex-grid-cell {
   flex: 0 0 100%;
   /* IE 10 fallback */
   width: 100%;
   max-width: 100%;
 }
 
-.lg-grid--1of4 {
-  > .grid-cell {
+.lg-flex-grid--1of4 {
+  > .flex-grid-cell {
     flex: 0 0 50%;
     /* IE 10 fallback */
     width: 50%;
@@ -63,9 +63,9 @@ Flex grid based off of Philip Walton's Solved by Flexbox
 
 @mixin mq $break-md {
   
-  .lg-grid--1of4,
-  .md-grid--1of2 {
-    > .grid-cell {
+  .lg-flex-grid--1of4,
+  .md-flex-grid--1of2 {
+    > .flex-grid-cell {
       flex: 0 0 50%;
       /* IE 10 fallback */
       width: 50%;
@@ -74,12 +74,12 @@ Flex grid based off of Philip Walton's Solved by Flexbox
   }
 
   /* first cell can't grow in width, second can */
-  .md-grid--1of2-first-static {
+  .md-flex-grid--1of2-first-static {
     flex-wrap: nowrap;
-    > .grid-cell:first-child {
+    > .flex-grid-cell:first-child {
       flex: 0 1 auto;
     }
-    > .grid-cell:last-child {
+    > .flex-grid-cell:last-child {
       flex: 1 1 auto;
     }
   }
@@ -88,8 +88,8 @@ Flex grid based off of Philip Walton's Solved by Flexbox
 
 @mixin mq $break-lg {
   
-  .lg-grid--1of4 {
-    > .grid-cell {
+  .lg-flex-grid--1of4 {
+    > .flex-grid-cell {
       flex: 0 0 25%;
       /* IE 10 fallback */
       width: 25%;
