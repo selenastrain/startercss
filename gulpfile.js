@@ -3,6 +3,7 @@ var gulp = require('gulp'),
     gulpCopy = require('gulp-copy'),
     uglify = require('gulp-uglify'),
     svgSprite = require('gulp-svg-sprite'),
+    svgSymbols = require('gulp-svg-symbols'),
     imagemin = require('gulp-imagemin'),
     postcss = require('gulp-postcss'),
         simpleVars = require('postcss-simple-vars'),
@@ -25,6 +26,7 @@ var paths = {
     css: 'source/css/**/*.css',
     images: 'source/images/*',
     sprites: 'source/svg-sprites/*.svg',
+    icons: 'source/svg-icons/*.svg',
     js: 'source/js/*.js'
 };
 
@@ -93,6 +95,18 @@ gulp.task('sprites', function() {
         .pipe(svgSprite(spriteConfig))
         .pipe(gulp.dest(''));
 });
+// build svg shapes
+gulp.task('shapes', function () {
+  return gulp.src(paths.icons)
+    .pipe(svgSymbols({
+        templates: ['default-svg'],
+        title: '%f',
+        slug: function (name) {
+            return name.toLowerCase().trim().replace(/\s/g, '-');
+        }
+    }))
+    .pipe(gulp.dest('dist/images'));
+});
 // minify images
 gulp.task('imagemin', function () {
    return gulp.src(paths.images)
@@ -158,6 +172,7 @@ gulp.task('watch', function() {
     // not including css watch because it's already in the serve task
     watching = true;
     gulp.watch(paths.js, ['js']);
+    gulp.watch(paths.icons, ['shapes']);
     gulp.watch([paths.images, paths.sprites], ['build-images']);
 });
 

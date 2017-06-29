@@ -20,12 +20,25 @@ The Gulp tasks are configured to
 * Open & auto reload the mdcss styleguide in the browser
 * Minify JS
 * Build an svg sprite sheet
+* Build an svg symbols file
 * Minify images
 
 You can add to, remove, or modify any of these tasks. 
 
 #### Sprites Task
 If you need to change the sprite image path, see /src/svg-sprites/sprites.css
+
+#### SVG Symbols
+Bug with Chrome is that the svg file needs to be placed as the first thing in the body. If you don't have access to change markup on the body then you can inject it with JS.
+
+```javascript
+$.ajax({
+  url: "[YOURPATHHERE]/images/svg-symbols.svg",
+  context: document.body
+}).done(function(data) {
+  $('svg',data).attr('class','visually-hidden').prependTo('body');
+});
+```
 
 ## But This is Just a Starting Point
 Please modify and add to these files as much as you want!
