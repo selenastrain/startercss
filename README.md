@@ -1,21 +1,24 @@
 A CSS starter project from [Gravity Works](http://www.gravityworksdesign.com/).
 
 ## Getting Started
-1. Install [Node.js](https://nodejs.org/en/) and [Gulp.js](http://gulpjs.com/) if you don't have them already
-2. Copy all the files and folders inside of /gwpostcss into your theme directory (don't forget the .gitignore)
-3. Navigate to your theme directory in command line
+
+1. Install [Node.js](https://nodejs.org/en/), [Gulp.js](http://gulpjs.com/) and [Node Version Manager](https://github.com/creationix/nvm/blob/master/README.md#installation) if you don't have them already
+2. Copy all the files and folders in /startercss into your project's theme folder (don't forget the .gitignore) and navigate there in command line
+3. Run `nvm use`* to make sure you're running the right version of node for this project
 4. Run `npm install` to download all the required node modules
 5. Run `gulp` to start watching your files for changes, or `gulp thetaskname` to run a single task. See gulpfile.js for all available tasks.
 
+\* Optional but recommended
+
 ### Folder Structure
-`/src` = Source files. These are for dev use only.
+`/source` = Source files. These are for dev use only.
 
 `/dist` = Distribution files. These go on the server.
 
 ### The Gulp Tasks
 The Gulp tasks are configured to
 
-* Compile [PostCSS](https://github.com/postcss/postcss) into minified CSS
+* Compile Sass into minified CSS
 * Create a styleguide with [mdcss](https://github.com/jonathantneal/mdcss) (see /src/styleguide/)
 * Open & auto reload the mdcss styleguide in the browser
 * Minify JS
