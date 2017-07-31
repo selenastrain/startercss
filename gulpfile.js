@@ -2,12 +2,12 @@ var gulp = require('gulp'),
     gulpUtil = require('gulp-util'),
     gulpCopy = require('gulp-copy'),
     sassGlob = require('gulp-sass-glob'),
+    imagemin = require('gulp-imagemin'),
     sass = require('gulp-sass'),
     sourcemaps = require('gulp-sourcemaps'),
     uglify = require('gulp-uglify'),
     svgSprite = require('gulp-svg-sprite'),
     svgSymbols = require('gulp-svg-symbols'),
-    imagemin = require('gulp-imagemin'),
     cssImport = require('css-import'),
     cssmqpacker = require('css-mqpacker'),
     csswring = require('csswring'),
@@ -83,13 +83,12 @@ function onError(err) {
 
 
 
-
 /*------------------------------------*\
   #Images
 \*------------------------------------*/
 
-gulp.task('build-images', function(callback) {
-  runSequence('clean-images', ['imagemin', 'sprites'], 'copy-images', callback);
+gulp.task('images', function(callback) {
+  runSequence('clean-images', 'imagemin', callback);
 });
 
 // get rid of old images
@@ -105,8 +104,7 @@ gulp.task('imagemin', function () {
           svgoPlugins: [{removeViewBox: false}],
           use: [pngquant()]
       }))
-      .pipe(gulp.dest(paths.dist.images))
-    ;
+      .pipe(gulp.dest(paths.dist.images));
 });
 
 
@@ -181,7 +179,7 @@ gulp.task('watch', function() {
     gulp.watch(paths.source.styles, ['styles']);
     gulp.watch(paths.source.scripts, ['scripts']);
     gulp.watch(paths.source.icons, ['shapes']);
-    gulp.watch([paths.source.images, paths.source.sprites], ['build-images']);
+    gulp.watch([paths.source.images, paths.source.sprites], ['images']);
 });
 
 

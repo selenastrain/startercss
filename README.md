@@ -15,6 +15,8 @@ A CSS starter project from [Gravity Works](http://www.gravityworksdesign.com/).
 
 `/dist` = Distribution files. These go on the server.
 
+`/pattern-library` = See Astrum Pattern Library below
+
 ### The Gulp Tasks
 The Gulp tasks are configured to
 

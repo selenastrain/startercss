@@ -147,9 +147,9 @@
             "title": "Page",
             "components": [
                 {
-                    "group": "page",
                     "name": "regions",
-                    "title": "Regions"
+                    "title": "Regions",
+                    "group": "page"
                 },
                 {
                     "group": "page",
