@@ -43,5 +43,9 @@ $.ajax({
 });
 ```
 
-## But This is Just a Starting Point
-Please modify and add to these files as much as you want!
+## Astrum Pattern Library
+[Getting started with Astrum](https://github.com/NoDivide/astrum#getting-started)
+
+Note: Until we get browsersync or some kind of server set up for this, **it will only work in Firefox**. For more info see [this issue](https://github.com/NoDivide/astrum/issues/43) and the console errors that come up in other browsers. 
+
+To view your library, manually open /yourproject/pattern-library/index.html in Firefox.
