@@ -47,6 +47,5 @@ $.ajax({
 
 ## Astrum Pattern Library
 
-1. In `/pattern-library/data.json` change the assets to your file paths
-2. Run the gulp task to see the library in-browser
-3. Add and edit components: [Getting started with Astrum](https://github.com/NoDivide/astrum#getting-started)
+1. Run the gulp task to see the library in-browser
+2. Add and edit components: [Getting started with Astrum](https://github.com/NoDivide/astrum#getting-started)
