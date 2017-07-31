@@ -14,7 +14,8 @@ var gulp = require('gulp'),
     pngquant = require('imagemin-pngquant'),
     del = require('del'),
     runSequence = require('run-sequence'),
-    browserSync = require('browser-sync').create();
+    browserSync = require('browser-sync').create(),
+    reload = browserSync.reload;
 
 
 
@@ -30,7 +31,8 @@ var paths = {
       images: './source/images/*',
       sprites: './source/svg-sprites/*.svg',
       icons: './source/svg-icons/*.svg',
-      scripts: './source/js/*.js'
+      scripts: './source/js/*.js',
+      patterns: ['./pattern-library/**/*.html', './pattern-library/**/*.md', './pattern-library/data.json',],
     },
     dist: {
       styles: './dist/css',
@@ -145,7 +147,25 @@ gulp.task('shapes', function () {
 gulp.task('scripts', function() {
   return gulp.src(paths.source.scripts)
     .pipe(uglify().on('error', onError))
+    .pipe(gulp.dest('./pattern-library/assets/js'))
     .pipe(gulp.dest(paths.dist.scripts));
+});
+
+
+
+
+
+/*------------------------------------*\
+  #SERVER
+\*------------------------------------*/
+
+gulp.task('serve', ['styles'], function() {
+    browserSync.init({
+        server: './pattern-library'
+    });
+
+    gulp.watch(paths.source.styles, ['styles']).on('change', reload);
+    gulp.watch(paths.source.patterns).on('change', reload);
 });
 
 
@@ -163,7 +183,8 @@ gulp.task('styles', function () {
       .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
       .pipe(sourcemaps.write('/')) // Finish source maps
       .pipe(gulp.dest(paths.dist.styles))
-    ;
+      .pipe(gulp.dest('./pattern-library/assets/css'))
+      .pipe(reload({ stream: true }));
 });
 
 
@@ -190,4 +211,4 @@ gulp.task('watch', function() {
   #DEFAULT
 \*------------------------------------*/
 
-gulp.task('default', ['watch']);
+gulp.task('default', ['serve', 'watch']);

@@ -31,7 +31,7 @@ The Gulp tasks are configured to
 You can add to, remove, or modify any of these tasks. 
 
 #### Sprites Task
-If you need to change the sprite image path, see /src/svg-sprites/sprites.css
+If you need to change the sprite image path, see `/src/svg-sprites/sprites.css`
 
 #### SVG Symbols
 Bug with Chrome is that the svg file needs to be placed as the first thing in the body. If you don't have access to change markup on the body then you can inject it with JS.
@@ -46,8 +46,7 @@ $.ajax({
 ```
 
 ## Astrum Pattern Library
-[Getting started with Astrum](https://github.com/NoDivide/astrum#getting-started)
 
-Note: Until we get browsersync or some kind of server set up for this, **it will only work in Firefox**. For more info see [this issue](https://github.com/NoDivide/astrum/issues/43) and the console errors that come up in other browsers. 
-
-To view your library, manually open /yourproject/pattern-library/index.html in Firefox.
+1. In `/pattern-library/data.json` change the assets to your file paths
+2. Run the gulp task to see the library in-browser
+3. Add and edit components: [Getting started with Astrum](https://github.com/NoDivide/astrum#getting-started)
