@@ -1,0 +1,1 @@
+The flex grid has more, ah, *flexibility* in positining, spacing and sizing of cells, but the simple grid can be useful if you need a quick fix.
