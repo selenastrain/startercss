@@ -1,0 +1,38 @@
+$table-pad: 1.5rem;
+
+table {
+  width: 100%;
+  border-spacing: 0;
+  line-height: 1.2;
+  text-align: left;
+}
+
+th {
+  padding: 2rem $table-pad;
+}
+
+td {
+  padding: $table-pad;
+}
+
+thead {
+  th {
+    color: #fff;
+    background: gray;
+  }
+}
+
+tbody {
+  border: 1px solid lightgray;
+  tr:nth-child(even) {
+    td {
+      background: lightgray;
+    }
+  }
+
+  tr:nth-child(odd) {
+    td {
+      background: #fff;
+    }
+  }
+}

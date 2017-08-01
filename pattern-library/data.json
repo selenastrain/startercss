@@ -98,9 +98,7 @@
                 {
                     "name": "tables",
                     "title": "Tables",
-                    "options": {
-                        "disable_code_sample": true
-                    },
+                    "options": {},
                     "group": "base"
                 },
                 {
