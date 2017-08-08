@@ -127,6 +127,7 @@ gulp.task('sprites', function() {
 gulp.task('shapes', function () {
   return gulp.src(paths.source.icons)
     .pipe(svgSymbols({
+        id: 'icon-%f',
         templates: ['default-svg'],
         title: '%f',
         slug: function (name) {
