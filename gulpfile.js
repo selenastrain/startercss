@@ -23,19 +23,19 @@ var gulp = require('gulp'),
 
 var paths = {
     source: {
-      styles: './source/css/**/*.scss',
-      images: './source/images/*',
-      sprites: './source/svg-sprites/*.svg',
-      icons: './source/svg-icons/*.svg',
-      scripts: './source/js/*.js',
-      patterns: ['./pattern-library/**/*.html', './pattern-library/**/*.md', './pattern-library/data.json',],
+      styles: 'source/css/**/*.scss',
+      images: 'source/images/*',
+      sprites: 'source/svg-sprites/*.svg',
+      icons: 'source/svg-icons/*.svg',
+      scripts: 'source/js/*.js',
+      patterns: ['pattern-library/**/*.html', 'pattern-library/**/*.md', 'pattern-library/data.json',],
     },
     dist: {
-      styles: './css',
-      images: './images',
-      sprites: './images',
-      icons: './images',
-      scripts: './js',
+      styles: 'css',
+      images: 'images',
+      sprites: 'images',
+      icons: 'images',
+      scripts: 'js',
     }
 };
 
@@ -79,7 +79,7 @@ function onError(err) {
 \*------------------------------------*/
 
 gulp.task('images', function(callback) {
-  runSequence('clean-images', 'imagemin', callback);
+  runSequence('clean-images', ['imagemin', 'sprites'], callback);
 });
 
 // get rid of old images
