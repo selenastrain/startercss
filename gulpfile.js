@@ -17,10 +17,6 @@ var gulp = require('gulp'),
     browserSync = require('browser-sync').create(),
     reload = browserSync.reload;
 
-
-
-
-
 /*------------------------------------*\
   #OPTIONS
 \*------------------------------------*/
@@ -35,11 +31,11 @@ var paths = {
       patterns: ['./pattern-library/**/*.html', './pattern-library/**/*.md', './pattern-library/data.json',],
     },
     dist: {
-      styles: './dist/css',
-      images: './dist/images',
-      sprites: './dist/images',
-      icons: './dist/images',
-      scripts: './dist/js',
+      styles: './css',
+      images: './images',
+      sprites: './images',
+      icons: './images',
+      scripts: './js',
     }
 };
 
@@ -54,7 +50,7 @@ var spriteConfig = {
       css: {
           bust: false,
           dest: './',
-          sprite: 'dist/images/sprites.svg',
+          sprite: 'images/sprites.svg',
           render: {
               scss: {
                   dest: './source/css/base/_sprites.scss',
@@ -64,10 +60,6 @@ var spriteConfig = {
       }
     }
 };
-
-
-
-
 
 /*------------------------------------*\
   #ERRORS
@@ -81,9 +73,6 @@ function onError(err) {
     process.exit(1);
   }
 }
-
-
-
 
 /*------------------------------------*\
   #Images
@@ -109,10 +98,6 @@ gulp.task('imagemin', function () {
       .pipe(gulp.dest(paths.dist.images));
 });
 
-
-
-
-
 /*------------------------------------*\
   #SVGS
 \*------------------------------------*/
@@ -137,10 +122,6 @@ gulp.task('shapes', function () {
     .pipe(gulp.dest(paths.dist.images));
 });
 
-
-
-
-
 /*------------------------------------*\
   #SCRIPTS
 \*------------------------------------*/
@@ -151,10 +132,6 @@ gulp.task('scripts', function() {
     .pipe(gulp.dest('./pattern-library/assets/js'))
     .pipe(gulp.dest(paths.dist.scripts));
 });
-
-
-
-
 
 /*------------------------------------*\
   #SERVER
@@ -168,10 +145,6 @@ gulp.task('serve', ['styles'], function() {
     gulp.watch(paths.source.styles, ['styles']).on('change', reload);
     gulp.watch(paths.source.patterns).on('change', reload);
 });
-
-
-
-
 
 /*------------------------------------*\
   #STYLES
@@ -188,10 +161,6 @@ gulp.task('styles', function () {
       .pipe(reload({ stream: true }));
 });
 
-
-
-
-
 /*------------------------------------*\
   #WATCH
 \*------------------------------------*/
@@ -203,10 +172,6 @@ gulp.task('watch', function() {
     gulp.watch(paths.source.icons, ['shapes']);
     gulp.watch([paths.source.images, paths.source.sprites], ['images']);
 });
-
-
-
-
 
 /*------------------------------------*\
   #DEFAULT

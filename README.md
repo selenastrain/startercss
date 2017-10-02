@@ -12,7 +12,7 @@ A CSS starter project from [Gravity Works](https://github.com/gravityworks).
 
 ### Folder Structure
 * `/source` = Source files. These are for dev use only.
-* `/dist` = Distribution files. These go on the server.
+* `/` = Distribution files. These go on the server.
 * `/pattern-library` = See Astrum Pattern Library below
 
 ### The Gulp Tasks
@@ -26,7 +26,7 @@ The Gulp tasks are configured to
 * Build an svg sprite sheet
 * Build an svg symbols file
 
-You can add to, remove or modify any of these tasks. 
+You can add to, remove or modify any of these tasks.
 
 #### Sprites Task
 If you need to change the sprite image path, see `/source/svg-sprites/sprites.css`
