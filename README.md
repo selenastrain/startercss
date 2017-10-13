@@ -32,7 +32,24 @@ You can add to, remove or modify any of these tasks.
 If you need to change the sprite image path, see `/source/svg-sprites/sprites.css`
 
 #### SVG Symbols
-Bug with Chrome is that the svg file needs to be placed as the first thing in the body. If you don't have access to change markup on the body then you can inject it with JS.
+Bug with Chrome is that the svg file needs to be placed as the first thing in the body.
+
+Placing svg file:
+```
+</body>
+<svg xmlns="http://www.w3.org/2000/svg">
+    [CONTENT FROM SVG-SYMBOLS.SVG]
+</svg>
+```
+
+Using one image from the file:
+```
+<svg class="icon-svg" width="43" height="43"><use xlink:href="#icon-close-x"></use></svg>
+```
+Where width and height = that one image's dimensions.
+
+##### Fallback: SVG Injection
+If you don't have access to change markup on the body then you can inject it with JS.
 
 ```javascript
 $.ajax({
